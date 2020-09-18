@@ -2,6 +2,7 @@
 
 namespace Pagevamp;
 
+use Aws\Credentials\CredentialProvider;
 use Aws\CloudWatchLogs\CloudWatchLogsClient;
 use Maxbanton\Cwh\Handler\CloudWatch;
 use Monolog\Formatter\LineFormatter;
@@ -83,6 +84,8 @@ class Logger
 
         if ($cloudWatchConfigs['credentials']['key']) {
             $awsCredentials['credentials'] = $cloudWatchConfigs['credentials'];
+        } else {
+            $awsCredentials['credentials'] = CredentialProvider::defaultProvider();
         }
 
         return $awsCredentials;
