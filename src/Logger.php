@@ -84,6 +84,8 @@ class Logger
 
         if ($cloudWatchConfigs['credentials']['key']) {
             $awsCredentials['credentials'] = $cloudWatchConfigs['credentials'];
+        } else if ($cloudWatchConfigs['ecs']) {
+            $awsCredentials['credentials'] = CredentialProvider::ecsCredentials();
         } else {
             $awsCredentials['credentials'] = CredentialProvider::defaultProvider();
         }
